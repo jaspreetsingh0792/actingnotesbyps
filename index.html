@@ -146,6 +146,31 @@ p { margin: 0; }
 .billing .launch b { font: 700 1.2rem/1 var(--f-bill); letter-spacing: .04em; }
 .billing .launch s { color: var(--muted); }
 @media (max-width: 760px) { .billing { grid-template-columns: 1fr; } .billing .launch { white-space: normal; flex-wrap: wrap; border-radius: 14px; } .opening h1 .l2 { padding-left: 0; } }
+/* Hero portrait: the director's still sits beside the title on wide screens and under it on phones */
+.hero-head { position: relative; --h1: clamp(3.4rem, 10vw, 9.6rem); }
+.hero-still { margin: 0; }
+.hero-still img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.hero-still figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; color: var(--muted); }
+.hero-still .ig { min-height: 42px; padding: 10px 18px; font-size: .9rem; text-transform: none; letter-spacing: 0; background: rgba(11, 10, 9, .6); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); isolation: isolate; }
+.hero-still .ig svg { width: 16px; height: 16px; }
+@media (min-width: 901px) {
+  .hero-head { --h1: clamp(3.4rem, 8vw, 8.4rem); }
+  .opening .presents, .opening h1 { position: relative; z-index: 1; }
+  .opening h1 { font-size: var(--h1); width: fit-content; max-width: 100%; }
+  .opening h1 .l1 { display: block; max-width: 5.4em; }
+  .opening h1 .l2 { max-width: calc(4.3em + 8vw); }
+  .hero-still { position: absolute; top: 0; right: 0; bottom: 0; width: auto; aspect-ratio: 1 / 1; max-width: clamp(250px, calc(100% - 5.1 * var(--h1) + 40px), 540px); }
+  .hero-still img { object-position: 50% 14%;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 32%, #000 90%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 12%, #000 66%, transparent 100%); -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent 0, #000 32%, #000 90%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 12%, #000 66%, transparent 100%); mask-composite: intersect; }
+  .hero-still figcaption { position: absolute; z-index: 2; left: 0; right: 0; bottom: 3%; flex-direction: column; align-items: flex-end; gap: 8px; }
+}
+@media (max-width: 900px) {
+  .hero-still { position: relative; z-index: 0; margin: -100px calc(-1 * max(16px, 4vw)) 0; aspect-ratio: 4 / 5; max-height: 600px; }
+  .opening h1 { position: relative; z-index: 1; }
+  .hero-still img { object-position: 50% 26%; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 68%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 68%, transparent 100%); }
+  .hero-still figcaption { position: absolute; left: max(16px, 4vw); right: max(16px, 4vw); bottom: 5%; }
+}
 
 .dolly { margin-top: 40px; }
 .monitor { position: relative; aspect-ratio: 2.1 / 1; width: 100%; max-width: 100%; overflow: hidden; background: #000; border-radius: 18px; isolation: isolate; }
@@ -434,6 +459,7 @@ td .no { color: var(--muted); }
   <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   <symbol id="i-cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 13 5.2 3.5a.5.5 0 0 0 .8-.4V7.9a.5.5 0 0 0-.8-.4L16 11"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></symbol>
@@ -470,8 +496,14 @@ td .no { color: var(--muted); }
   <!-- Scene 1 · WS -->
   <section class="opening" id="monitor-scene" data-shot="WS" data-lens="24mm" aria-labelledby="hero-title">
     <div class="wrap">
+      <div class="hero-head">
       <p class="presents hud"><span data-type>Pushpinder Singh presents</span><span data-type>Two guides for actors &middot; Reel 1</span></p>
       <h1 id="hero-title" data-split><span class="l1">The camera hears</span> <span class="l2">what you <em>don&rsquo;t</em> say.</span></h1>
+      <figure class="hero-still" data-fade>
+        <img src="pushpinder-hero.jpg" width="900" height="1395" alt="Pushpinder Singh, actor and acting coach, seated on a wooden bench in a white linen shirt" fetchpriority="high" decoding="async">
+        <figcaption><a class="btn line ig" href="https://ig.me/m/iam.pusshpindersiingh" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg>Message on Instagram</a></figcaption>
+      </figure>
+      </div>
       <div class="billing">
         <p class="block" data-fade>A Pushpinder Singh guide &middot; <b>The Camera Actor&rsquo;s Toolkit</b> &middot; and &middot; <b>The Working Actor&rsquo;s Side Hustle Survival Kit</b> &middot; 80 pages &middot; 24 chapters &middot; 7 worksheets &middot; read on your phone &middot; use on set</p>
         <p class="launch" id="launch-note" data-fade><span class="dot blink"></span><span class="hud">Launch price</span><span>Both for <b data-hero="bundle-now">&#8377;349</b> <s data-hero="bundle-reg">&#8377;499</s></span></p>
@@ -852,7 +884,7 @@ td .no { color: var(--muted); }
           <p class="slate-line hud" id="contact-title" style="margin:0"><b>Casting desk</b><span>Contact</span></p>
           <dl>
             <div><dt class="hud">Email</dt><dd class="copy-line"><span id="email">ps@actingnotesbyps.com</span><button type="button" class="copy-btn" id="copy-email">Copy</button></dd></div>
-            <div><dt class="hud">Instagram</dt><dd><a href="https://www.instagram.com/iam.pusshpindersiingh/" target="_blank" rel="noopener">@iam.pusshpindersiingh</a></dd></div>
+            <div><dt class="hud">Instagram</dt><dd class="copy-line"><a href="https://www.instagram.com/iam.pusshpindersiingh/" target="_blank" rel="noopener">@iam.pusshpindersiingh</a><a class="copy-btn" href="https://ig.me/m/iam.pusshpindersiingh" target="_blank" rel="noopener" style="text-decoration:none">Message</a></dd></div>
             <div><dt class="hud">Based in</dt><dd>Gurgaon (Gurugram), Haryana, India</dd></div>
           </dl>
         </aside>
