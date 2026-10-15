@@ -470,6 +470,27 @@ td .no { color: var(--muted); }
 .hudbar .btn { min-height: 44px; padding: 10px 18px; }
 @media (max-width: 640px) { .hudbar .lensname, .hudbar .prog { display: none; } .hudbar .price-mini span { display: none; } }
 </style>
+<!-- Meta Pixel: page views and checkout / free-kit / Instagram clicks -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1740320393718256');
+fbq('track', 'PageView');
+document.addEventListener('click', function (ev) {
+  var a = ev.target.closest && ev.target.closest('a[href]');
+  if (!a || !window.fbq) return;
+  var h = a.href, price = { 'toolkit': [199, 7], 'survival-kit': [199, 7], 'both-guides': [349, 12] };
+  var m = h.match(/(?:rzp\.io\/rzp\/pushpinder-|gumroad\.com\/l\/)(toolkit|survival-kit|both-guides)/);
+  if (m) {
+    var usd = h.indexOf('gumroad') > -1;
+    fbq('track', 'InitiateCheckout', { content_name: m[1], value: price[m[1]][usd ? 1 : 0], currency: usd ? 'USD' : 'INR' });
+  } else if (h.indexOf('subscribepage.io') > -1) {
+    fbq('trackCustom', 'FreeKitClick');
+  } else if (h.indexOf('ig.me/') > -1 || h.indexOf('instagram.com/') > -1) {
+    fbq('track', 'Contact');
+  }
+}, true);
+</script>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1740320393718256&ev=PageView&noscript=1"></noscript>
 </head>
 <body>
 
