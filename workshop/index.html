@@ -72,7 +72,7 @@ document.addEventListener('click', function (ev) {
   if (!a || !window.fbq) return;
   if (a.href.indexOf('subscribepage.io') > -1) fbq('trackCustom', 'FreeKitClick');
   else if (a.href.indexOf('rzp.io') > -1 || a.href.indexOf('razorpay') > -1) fbq('track', 'InitiateCheckout', { content_name: 'workshop-25-oct', value: 1199, currency: 'INR' });
-  else if (a.href.indexOf('ig.me/') > -1 || a.href.indexOf('instagram.com/') > -1) fbq('track', 'Contact');
+  else if (a.href.indexOf('wa.me/') > -1 || a.href.indexOf('tel:') === 0 || a.href.indexOf('ig.me/') > -1 || a.href.indexOf('instagram.com/') > -1) fbq('track', 'Contact');
 }, true);
 </script>
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1740320393718256&ev=PageView&noscript=1"></noscript>
@@ -135,6 +135,22 @@ footer a { color: var(--fg); }
 .price s { font-size: 1.1rem; color: var(--muted); margin-left: 14px; }
 .sched td:first-child { font: 500 13px/1.4 var(--f-hud); color: var(--tungsten); white-space: nowrap; }
 .hero .btn { margin-top: 8px; }
+.btn.wa { background: #1FA855; margin-left: 8px; }
+.btns { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.btns .btn.wa { margin-left: 0; }
+.reel { position: relative; width: min(78%, 340px); aspect-ratio: 9 / 16; margin: 22px 0 26px; background: #000; border: 1px solid var(--line); }
+.reel video { width: 100%; height: 100%; display: block; object-fit: cover; }
+.reel button { position: absolute; left: 12px; bottom: 12px; border: 0; background: rgba(11,10,9,.82); color: #fff; font: 600 14px/1 var(--f-body); padding: 11px 14px; cursor: pointer; }
+.teacher { display: grid; grid-template-columns: 140px 1fr; gap: 20px; align-items: start; margin: 18px 0; }
+.teacher img { width: 140px; height: 180px; object-fit: cover; object-position: 50% 15%; }
+.teacher p { margin: 0 0 10px; }
+.contact-line { font-size: .95rem; color: #2a2622; margin: 14px 0 0; }
+.contact-line a { color: #2a2622; font-weight: 600; }
+.stick { position: fixed; left: 0; right: 0; bottom: 0; z-index: 9; display: none; gap: 1px; background: var(--line); padding-bottom: env(safe-area-inset-bottom); }
+.stick a { flex: 1; text-align: center; padding: 15px 8px; font: 700 15px/1.2 var(--f-body); color: #fff; text-decoration: none; background: var(--rec); }
+.stick a.wa { background: #1FA855; }
+@media (max-width: 720px) { .stick { display: flex; } body { padding-bottom: 60px; } }
+@media (max-width: 520px) { .teacher { grid-template-columns: 1fr; } .teacher img { width: 100%; height: 300px; } }
 @media (max-width: 520px) { .facts { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -150,10 +166,16 @@ footer a { color: var(--fg); }
   <div class="hero">
     <p class="hud"><span class="dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--rec);margin-right:8px"></span>Live workshop &middot; Faridabad &middot; 20 seats</p>
     <h1>Acting for camera: <em>look natural in close-ups</em></h1>
+    <div class="reel">
+      <video id="reel" src="reel.mp4" poster="reel-poster_1.jpg" playsinline muted autoplay loop preload="metadata" aria-label="Pushpinder announces the workshop"></video>
+      <button type="button" id="snd">&#128264; Tap for sound</button>
+    </div>
     <p class="lede">A 2-hour hands-on workshop where every actor performs on camera, watches it back, and gets personal notes from me. You&rsquo;ll leave knowing exactly why a take looks fake, and how to fix it in your next audition or self-tape.</p>
     <p><span class="price">&#8377;1,199</span><s>&#8377;1,499</s></p>
     <p class="hud" style="margin:6px 0 14px">Early bird for the first 8 seats</p>
-    <a class="btn" href="https://rzp.io/rzp/pushpinder-workshop-25oct">Book your seat</a>
+    <div class="btns"><a class="btn" href="https://rzp.io/rzp/pushpinder-workshop-25oct">Book your seat</a>
+    <a class="btn wa" href="https://wa.me/917217658796?text=Hi%20Pushpinder%2C%20I%20want%20to%20join%20the%20acting%20workshop%20on%2025%20Oct%20in%20Faridabad.">WhatsApp to book</a></div>
+    <p class="hud" style="margin-top:14px">Questions? Call or WhatsApp <a href="tel:+917217658796">72176 58796</a> &middot; <a href="tel:+919650644439">96506 44439</a></p>
   </div>
 
   <div class="facts">
@@ -182,14 +204,24 @@ footer a { color: var(--fg); }
     <li>The self-tape checklist I use with my actors</li>
   </ul>
 
+  <h2>Who&rsquo;s teaching</h2>
+  <div class="teacher">
+    <img src="/pushpinder-hero.jpg" alt="Pushpinder Singh, actor and acting coach" loading="lazy">
+    <div>
+      <p><b>Pushpinder Singh</b> is an actor and celebrity acting coach based in Gurgaon. He works one-on-one with creators and actors on how to look real on camera.</p>
+      <p>This workshop is the same camera-first method he uses in private sessions, in a small group of 20, so everyone gets time on camera and personal notes.</p>
+    </div>
+  </div>
+
   <h2>What to bring</h2>
   <p>Your phone (charged), comfortable clothes, and a bottle of water. No preparation needed: I&rsquo;ll give you short scenes on the day.</p>
 
   <section class="cta" aria-label="Book a seat">
     <h2>Only 20 seats</h2>
-    <p>Early bird &#8377;1,199 for the first 8 actors, then &#8377;1,499. Pay securely by UPI or card, and I&rsquo;ll WhatsApp you the details. Questions? <a href="https://ig.me/m/iam.pusshpindersiingh" style="color:#2a2622">Message me on Instagram</a>.</p>
-    <a class="btn" href="https://rzp.io/rzp/pushpinder-workshop-25oct">Book your seat</a>
-    <a class="btn alt" href="/">About Pushpinder</a>
+    <p>Early bird &#8377;1,199 for the first 8 actors, then &#8377;1,499. Pay securely by UPI or card, and I&rsquo;ll WhatsApp you the details. Prefer to talk first? WhatsApp me and I&rsquo;ll answer any question.</p>
+    <div class="btns"><a class="btn" href="https://rzp.io/rzp/pushpinder-workshop-25oct">Book your seat</a>
+    <a class="btn wa" href="https://wa.me/917217658796?text=Hi%20Pushpinder%2C%20I%20want%20to%20join%20the%20acting%20workshop%20on%2025%20Oct%20in%20Faridabad.">WhatsApp to book</a></div>
+    <p class="contact-line">Call / WhatsApp: <a href="tel:+917217658796">72176 58796</a> &middot; <a href="tel:+919650644439">96506 44439</a> &middot; <a href="https://wa.me/919650644439?text=Hi%2C%20I%20want%20to%20join%20the%20acting%20workshop%20on%2025%20Oct%20in%20Faridabad.">WhatsApp 2nd number</a></p>
   </section>
 
   <h2>Questions</h2>
@@ -197,6 +229,8 @@ footer a { color: var(--fg); }
   <p>Yes. The workshop starts from the basics of how the camera sees you. Experienced actors get just as much from the playback and notes.</p>
   <h3>Do I need to prepare a monologue?</h3>
   <p>No. I&rsquo;ll give you short scenes on the day.</p>
+  <h3>Can I ask something before I pay?</h3>
+  <p>Of course. <a href="https://wa.me/917217658796?text=Hi%20Pushpinder%2C%20I%20want%20to%20join%20the%20acting%20workshop%20on%2025%20Oct%20in%20Faridabad.">WhatsApp me</a> or call 72176 58796 / 96506 44439.</p>
   <h3>How do I get there?</h3>
   <p>Take the Violet Line to Mewala Maharajpur metro station; the studio is a 5-minute walk. <a href="https://www.google.com/maps/search/?api=1&amp;query=White+and+Grey+Studio+7+Block+A+DLF+Industrial+Area+Sector+31+Faridabad">Directions on Google Maps</a>.</p>
 </main>
@@ -207,5 +241,16 @@ footer a { color: var(--fg); }
     <p>&copy; 2026 Pushpinder. All rights reserved.</p>
   </div>
 </footer>
+<div class="stick"><a href="https://rzp.io/rzp/pushpinder-workshop-25oct">Book seat &middot; &#8377;1,199</a><a class="wa" href="https://wa.me/917217658796?text=Hi%20Pushpinder%2C%20I%20want%20to%20join%20the%20acting%20workshop%20on%2025%20Oct%20in%20Faridabad.">WhatsApp</a></div>
+<script>
+(function () {
+  var v = document.getElementById('reel'), b = document.getElementById('snd');
+  if (!v || !b) return;
+  b.addEventListener('click', function () {
+    if (v.muted) { v.muted = false; v.currentTime = 0; v.play(); b.innerHTML = '&#128263; Mute'; if (window.fbq) fbq('trackCustom', 'ReelSound'); }
+    else { v.muted = true; b.innerHTML = '&#128264; Tap for sound'; }
+  });
+})();
+</script>
 </body>
 </html>
